@@ -1,4 +1,4 @@
-name: Android debug APK
+name: Beckenbauer Android APK
 on:
   push:
     branches: [main]
@@ -7,28 +7,30 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  android:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: { contents: read }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-      - name: Install Android SDK platform
+        with: { distribution: temurin, java-version: '17' }
+      - name: Install Android SDK
         run: |
-          SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -type f -path '*/bin/sdkmanager' | head -n 1)
+          SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -type f -path '*/bin/sdkmanager' | head -1)
           test -n "$SDKMANAGER"
           "$SDKMANAGER" --install 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Fetch licensed YOLOv8n model (verify SHA256)
+        run: |
+          mkdir -p app/src/main/assets
+          curl --fail --location --retry 3 --output app/src/main/assets/yolov8n.tflite \
+            'https://huggingface.co/opencv/opencv_contribution/resolve/refs%2Fpr%2F14/yolov8n/yolov8n.tflite'
+          echo 'a2dde486ad6ec930ec3be2f9248351baef0ac4b1ad93a083fc80bf4884ed74ae  app/src/main/assets/yolov8n.tflite' | sha256sum -c -
       - uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.10.2'
-      - name: Test and assemble APK
+        with: { gradle-version: '8.10.2' }
+      - name: Unit tests and APK
         run: gradle --no-daemon :app:testDebugUnitTest :app:assembleDebug --stacktrace
       - uses: actions/upload-artifact@v4
         with:
-          name: RACA-debug-apk
+          name: BeckenbauerAI-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error

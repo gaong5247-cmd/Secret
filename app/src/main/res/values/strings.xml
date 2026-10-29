@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="accessibility_description">Experimental touch gesture controller. Only injects inputs while the Roblox client is detected in the foreground. Requires explicit authorization to use.</string>
+  <string name="app_name">Beckenbauer AI Lab</string>
+  <string name="accessibility_description">Explicitly authorized testing only. Opt-in joystick, camera and calibrated football buttons. No anti-cheat bypass.</string>
 </resources>
