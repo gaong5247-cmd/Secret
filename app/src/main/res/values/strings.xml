@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="accessibility_description">Experimental touch gesture controller. Only injects inputs while the Roblox client is detected in the foreground. Requires explicit authorization to use.</string>
+</resources>
