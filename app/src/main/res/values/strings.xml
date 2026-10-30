@@ -1,4 +1,5 @@
 <resources>
   <string name="app_name">Beckenbauer AI Lab</string>
   <string name="accessibility_description">Explicitly authorized testing only. Opt-in joystick, camera and calibrated football buttons. No anti-cheat bypass.</string>
+  <string name="alphaterr_accessibility_description">Single-player testing only. User-confirmed local screen tapping and emergency stop. No multiplayer automation or bypass.</string>
 </resources>
