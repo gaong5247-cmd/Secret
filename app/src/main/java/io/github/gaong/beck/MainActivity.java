@@ -89,6 +89,7 @@ public final class MainActivity extends Activity {
     flex(buttons,button("② Start capture",v->beginCapture()));
     flex(buttons,button("■ STOP",v->stopAll()));
     main.addView(buttons);
+    main.addView(button("OPEN ALPHATERR · Territory AI Lab", v->startActivity(new Intent(this,AlphaTerrActivity.class))));
 
     allow=new CheckBox(this);
     allow.setText("운영자가 이 테스트 환경에서 외부 자동 조작을 명시적으로 허가했음을 확인합니다");
